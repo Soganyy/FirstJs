@@ -1,7 +1,7 @@
 .m{
     color: black;
     width: 336px;
-    height: 236px;
+    height: 300px;
     border: solid 2px gray;
     margin-left: 550px;
     margin-top: 200px;
@@ -9,13 +9,58 @@
 }
 .heading{
     margin: 0;
-    background-color: yellow;
-    height: 28px;
+    background: #FFDC40;
+    height: 40px;
     border-radius: 10% 10% 0 0;
 }
 h1{
     text-align: center;
+    margin-top: 25px;
 }
 #taskEnter{
-    vertical-align:bottom;
+    width: 70%;
+    height: 40px;
+    margin-left: 13%;
+    margin-top: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: large;
+    border: solid gray 2px;
+}
+.cancelButton{
+    position: absolute;
+    top: 351px;
+    left: 810px;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    border: 2px gray solid;
+    background-color: white;
+    text-decoration-color: gray;
+    font-size: 15px;
+}
+.buttonOrder{
+    background-color: white;
+    border: 0px;
+}
+.image1{
+    position: absolute;
+    top: 353px;
+    left: 855px;
+    width: 30px;
+    height: 20px;
+}
+.mainButtonSt{
+    padding: 0;
+    background-color: white;
+    border: 0px;
+    margin-top: 30px;
+    margin-left: 90px;
+}
+.mainButton{
+    width: 150px;
+    height: 42px;
+}
+.btnText{
+    
 }
