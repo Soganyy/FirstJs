@@ -17,13 +17,17 @@ const list = document.querySelector('.listOutput')
 let listElements = document.createElement('div')
 listElements.style = "width: 80%;" + 
     "display: flex;" +
-    "flex: column;";
+    "flex-direction: column;";
 list.append(listElements);
 
 mainButton.addEventListener('click', () => {
     mainArr[mainArr.length] = inputText.value;
 
     let sec = document.createElement('div')
+    sec.style = "style = 100%;" +
+        "display: flex;" + 
+        "flex-direction: row-reverse;" + 
+        "margin-top: 2px";
     
     let deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'x';
@@ -34,11 +38,13 @@ mainButton.addEventListener('click', () => {
         "text-decoration-color: gray;" +
         "background-color: white;" +
         "border: 2px gray solid;";
-    listElements.append(deleteButton);
+    sec.append(deleteButton);
 
     let listText = document.createElement('li');
     listText.innerHTML = mainArr[mainArr.length - 1];
-    listElements.append(listText);
+    listText.style.textAlign = "left";
+    sec.append(listText);
+    listElements.append(sec);
 });
 
 delBtnFirst.addEventListener('click', () => {
