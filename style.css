@@ -2,7 +2,7 @@
 .m{
     color: black;
     width: 336px;
-    height: 300px;
+    padding-bottom: 30px;
     border: solid 2px gray;
     margin-left: 550px;
     margin-top: 200px;
@@ -69,4 +69,20 @@ h1{
     top: 431px;
     left: 710px;
     color: white;
+}
+.listSection{
+    width: 72%;
+    padding-bottom: 30px;
+    margin-left: 13%;
+    border: solid gray 1px;
+    border-radius: 10px;
+    font-family: 'Roboto';
+    margin-top: 20px;
+}
+/* .listOutput{
+    margin-top: 35px;
+} */
+li{
+    list-style: none;
+    margin-bottom: 20px;
 }

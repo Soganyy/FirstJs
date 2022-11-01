@@ -10,10 +10,38 @@ const mainButton = document.querySelector('.mainButtonSt')
 // Delete button
 const delBtnFirst = document.querySelector('.cancelButton')
 
+// List
+const list = document.querySelector('.listOutput')
+
+// List elements //calismayan style
+let listElements = document.createElement('div')
+listElements.style = "width: 80%;" + 
+    "display: flex;" +
+    "flex: column;";
+list.append(listElements);
+
 mainButton.addEventListener('click', () => {
-    console.log(inputText.value)
+    mainArr[mainArr.length] = inputText.value;
+
+    let sec = document.createElement('div')
+    
+    let deleteButton = document.createElement('button');
+    deleteButton.innerHTML = 'x';
+    deleteButton.style = "border-radius: 50%;" +
+        "height: 25px;" +
+        "width: 25px" +
+        "font-size: 15px;" +
+        "text-decoration-color: gray;" +
+        "background-color: white;" +
+        "border: 2px gray solid;";
+    listElements.append(deleteButton);
+
+    let listText = document.createElement('li');
+    listText.innerHTML = mainArr[mainArr.length - 1];
+    listElements.append(listText);
 });
 
 delBtnFirst.addEventListener('click', () => {
     inputText.value = '';
 })
+
