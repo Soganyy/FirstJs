@@ -60,20 +60,38 @@ mainButton.addEventListener('click', () => {
     delLsElement.addEventListener('click', () => {
         divDelete.remove();
         
-        let numOfButton = delLsElement.className.match(/(\d+)/);
-        delete mainArr[numOfButton[0]];
 
-        // PROBLEM
-        // for(let m = 0; m < mainArr.length; m++) {
-        //     if(mainArr[m] == undefined) {
-        //         console.log(mainArr[m])
-        //         delete mainArr[m];
-        //     }
-        // }
+
+
+        let numOfButton = delLsElement.className.match(/(\d+)/)[0];
+        console.log(numOfButton);
+        // console.log(i);
+
+        console.log(mainArr[numOfButton])
+        delete mainArr[numOfButton];
+        console.log(mainArr[numOfButton])
+        // console.log(mainArr[numOfButton]);
+        // console.log(undefined);
+
+        let mainArrLength = mainArr.length;
+
+        let index = mainArr.indexOf(mainArr[numOfButton]);
+        mainArr.splice(index, 1)
+        
+        if(mainArr[m] == undefined && m < mainArrLength) {
+            // console.log(mainArr[m])
+            mainArr.splice(m, 1);
+            mainArrLength --;
+            // console.log(mainArrLength)
+        }
+
+
+        
+        
         // i--;
 
         console.log(mainArr);
-    })
+    });
 
     i++;
 });
@@ -125,4 +143,5 @@ sortBtn.addEventListener('click', () => {
     }
 
 });
+
 
