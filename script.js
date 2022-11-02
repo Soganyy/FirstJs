@@ -60,7 +60,7 @@ mainButton.addEventListener('click', () => {
         let numOfButton = delLsElement.className.match(/(\d+)/);
         delete mainArr[numOfButton[0]];
 
-        // for(let m = 0; m < mainArr.length; m++){
+        // for(let m = 0; m < mainArr.length; m++) {
         //     const index = array.indexOf(undefined);
         //     mainArr.splice(index, 1);
         // }
@@ -75,6 +75,27 @@ mainButton.addEventListener('click', () => {
 // Delete button in input
 delBtnFirst.addEventListener('click', () => {
     inputText.value = '';
-})
+});
 
 // Sorting
+const sortBtn = document.querySelector('.buttonSort');
+
+sortBtn.addEventListener('click', () => {
+    let arrSorted = [...mainArr];
+    
+    for(let m = 0; m < arrSorted.length; m++) {
+        index = arrSorted.indexOf(undefined);
+        if(index > 0){
+        arrSorted.splice(index, 1);
+        }
+    }
+
+    arrSorted.sort();
+    
+    // console.log(arrSorted)
+
+    const listElements = document.querySelectorAll('li');
+    for(let l = 0; l < arrSorted.length; l++) {
+        listElements[l].innerHTML = arrSorted[l];
+    }
+});
