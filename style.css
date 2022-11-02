@@ -12,7 +12,7 @@
     margin: 0;
     background: #FFDC40;
     height: 40px;
-    /* border-radius: 20% 20% 0 0; */
+    border-radius: 10px 10px 0 0;
 }
 h1{
     font-family: "Roboto";
