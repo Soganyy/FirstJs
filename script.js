@@ -63,13 +63,16 @@ mainButton.addEventListener('click', () => {
         let numOfButton = delLsElement.className.match(/(\d+)/);
         delete mainArr[numOfButton[0]];
 
+        // PROBLEM
         // for(let m = 0; m < mainArr.length; m++) {
-        //     const index = array.indexOf(undefined);
-        //     mainArr.splice(index, 1);
+        //     if(mainArr[m] == undefined) {
+        //         console.log(mainArr[m])
+        //         delete mainArr[m];
+        //     }
         // }
         // i--;
 
-        // console.log(mainArr);
+        console.log(mainArr);
     })
 
     i++;
@@ -83,9 +86,17 @@ delBtnFirst.addEventListener('click', () => {
 // Sorting
 const sortBtn = document.querySelector('.buttonSort');
 
+// image for reverse
+const image = document.querySelector('.image1');
+
+
+
+
+
 sortBtn.addEventListener('click', () => {
     let arrSorted = [...mainArr];
     
+    if(image.getAttribute('src') == '.\\photos\\icon.png'){
     for(let m = 0; m < arrSorted.length; m++) {
         index = arrSorted.indexOf(undefined);
         if(index > 0){
@@ -99,4 +110,19 @@ sortBtn.addEventListener('click', () => {
     for(let l = 0; l < arrSorted.length; l++) {
         listElements[l].innerHTML = arrSorted[l];
     }
+
+    image.setAttribute('src', '.\\photos\\iconReverse.png');
+    }
+    else if(image.getAttribute('src') == '.\\photos\\iconReverse.png'){
+        arrSorted.reverse();
+
+        const listElements = document.querySelectorAll('li');
+        for(let l = 0; l < arrSorted.length; l++) {
+            listElements[l].innerHTML = arrSorted[l];
+        }
+
+        image.setAttribute('src', '.\\photos\\icon.png');
+    }
+
 });
+
