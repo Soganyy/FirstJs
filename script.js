@@ -13,7 +13,7 @@ const delBtnFirst = document.querySelector('.cancelButton')
 // List
 const list = document.querySelector('.listOutput')
 
-// List elements //calismayan style
+// List elements 
 let listElements = document.createElement('div')
 listElements.style = "width: 80%;" + 
     "display: flex;" +
@@ -29,8 +29,15 @@ mainButton.addEventListener('click', () => {
     sec.className = `delLsDivBtn${i}`;
     sec.style = "style = 100%;" +
         "display: flex;" + 
-        "flex-direction: row-reverse;" + 
-        "margin-top: 2px";
+        "flex-direction: row;" + 
+        "margin-top: 20px";
+
+    let listText = document.createElement('li');
+    // listText.style = "display: flex;" + "text-align: left;";
+    listText.innerHTML = mainArr[mainArr.length - 1];
+    listText.style.textAlign = "left";
+    sec.append(listText);
+    listElements.append(sec);
     
     let deleteButton = document.createElement('button');
     deleteButton.className = `deleteListElement${i}`;
@@ -41,14 +48,10 @@ mainButton.addEventListener('click', () => {
         "font-size: 15px;" +
         "text-decoration-color: gray;" +
         "background-color: white;" +
-        "border: 2px gray solid;";
+        "border: 2px gray solid;" +
+        "position: absolute;" +
+        "left: 54%";
     sec.append(deleteButton);
-
-    let listText = document.createElement('li');
-    listText.innerHTML = mainArr[mainArr.length - 1];
-    listText.style.textAlign = "left";
-    sec.append(listText);
-    listElements.append(sec);
 
     // Deleting List element
     const delLsElement = document.querySelector(`.deleteListElement${i}`);
@@ -92,8 +95,6 @@ sortBtn.addEventListener('click', () => {
 
     arrSorted.sort();
     
-    // console.log(arrSorted)
-
     const listElements = document.querySelectorAll('li');
     for(let l = 0; l < arrSorted.length; l++) {
         listElements[l].innerHTML = arrSorted[l];
