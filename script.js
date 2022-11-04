@@ -1,114 +1,93 @@
-let mainArr = [];
+const inputText = document.querySelector('#taskEnter');
+const mainButton = document.querySelector('.mainButtonSt');
+const delBtnFirst = document.querySelector('.cancelButton');
+const list = document.querySelector('.listOutput');
+const sortBtn = document.querySelector('.buttonSort');
+const image = document.querySelector('.image1');   
 
-const inputText = document.querySelector('#taskEnter')
-const mainButton = document.querySelector('.mainButtonSt')
-const delBtnFirst = document.querySelector('.cancelButton')
-const list = document.querySelector('.listOutput')
-
-let listElements = document.createElement('div')
-listElements.style = "width: 80%;" + 
-    "display: flex;" +
-    "flex-direction: column;";
-list.append(listElements);
-
-let i = 0;
-mainButton.addEventListener('click', () => {
-    mainArr[mainArr.length] = inputText.value;
-
-    let sec = document.createElement('div')
-    sec.className = `delLsDivBtn${inputText.value}`;
-    sec.setAttribute('id', 'buttonForRearranging');
-    sec.style = "style = 100%;" +
-        "display: flex;" + 
-        "flex-direction: row;" + 
-        "margin-top: 20px";
-
-    let listText = document.createElement('li');
-    listText.innerHTML = mainArr[mainArr.length - 1];
-    listText.style.textAlign = "left";
-    sec.append(listText);
-    listElements.append(sec);
-    
-    let deleteButton = document.createElement('button');
-    deleteButton.className = `deleteListElement${inputText.value}`;
-    deleteButton.innerHTML = 'x';
-    deleteButton.style = "border-radius: 50%;" +
-        "height: 25px;" +
-        "width: 25px" +
-        "font-size: 15px;" +
-        "text-decoration-color: gray;" +
-        "background-color: white;" +
-        "border: 2px gray solid;" +
-        "position: absolute;" +
-        "left: 54%";
-    sec.append(deleteButton);
-
-    // Deleting element div and value in array
-    const delLsElement = document.querySelector(`.deleteListElement${inputText.value}`);
-    const divDelete = document.querySelector(`.delLsDivBtn${inputText.value}`);
-    delLsElement.addEventListener('click', () => {
-        divDelete.remove();
-        
-        let deletingElement = divDelete.className.substring(11);
-        mainArr.forEach(function(element) {
-            if(element == deletingElement) {
-                delete mainArr[mainArr.indexOf(element)];
-            };
-        });
-    });
-    i++;
-});
-
-// Delete button in input
 delBtnFirst.addEventListener('click', () => {
     inputText.value = '';
 });
 
-const sortBtn = document.querySelector('.buttonSort');
-const image = document.querySelector('.image1');   
+mainButton.addEventListener('click', () => {
+
+    let sec = document.createElement('div');
+    sec.className = `delLsDivBtn${inputText.value}`;
+    sec.setAttribute('id', 'sortingDiv');
+    sec.style = "style = 100%; display: flex; flex-direction: row; margin-top: 20px; height: 20px";
+    list.append(sec);
+
+    let listText = document.createElement('p');
+    listText.innerHTML = inputText.value;
+    listText.style.textAlign = "left";
+    listText.style.marginTop = "2px";
+    sec.append(listText);
+    
+    let deleteButton = document.createElement('button');
+    deleteButton.className = `deleteListElement${inputText.value}`;
+    deleteButton.setAttribute('id', 'sortingDelButton')
+    deleteButton.innerHTML = 'x';
+    deleteButton.style = "border-radius: 50%; height: 25px; width: 25px font-size: 15px; text-decoration-color: gray; background-color: white; border: 2px gray solid; position: absolute; left: 800px";
+    sec.append(deleteButton);
+
+    const delLsElement = document.querySelector(`.deleteListElement${inputText.value}`);
+    const divDelete = document.querySelector(`.delLsDivBtn${inputText.value}`);
+
+    delLsElement.addEventListener('click', () => {
+        divDelete.remove(); 
+    });
+});
 
 sortBtn.addEventListener('click', () => {
-    let arrSorted = [...mainArr];
     
     if(image.getAttribute('src') == '.\\photos\\icon.png'){
-        arrSorted.sort();
 
-        console.log(arrSorted)
-    
-        const listElements = document.querySelectorAll('li');
-        for(let l = 0; l < arrSorted.length; l++) {
-            if(arrSorted.indexOf(undefined) >= 0) {
-                arrSorted.splice(arrSorted.indexOf(undefined), 1);
-            }
+        let paragNodes = document.querySelectorAll('p');
+        let sortingArr = [];
+
+        for(let i = 0; i < paragNodes.length; i++){
+            sortingArr[i] = paragNodes[i].innerHTML;
         }
 
-        console.log(arrSorted)
+        sortingArr.sort();
 
-        const divReArrange = document.querySelectorAll('#buttonForRearranging');
-        for(let l = 0; l < divReArrange.length; l++){
-            divReArrange[l].className = arrSorted[l];
+        for(let i = 0; i < paragNodes.length; i++){
+            paragNodes[i].innerHTML = sortingArr[i];
         }
 
-        for(let l = 0; l < arrSorted.length; l++) {
-            listElements[l].innerHTML = arrSorted[l];
+        const sortingDiv = document.querySelectorAll('#sortingDiv');
+        const sortingDelButton = document.querySelectorAll('#sortingDelButton');
+
+        for(let i = 0; i < sortingArr.length; i++){
+            sortingDiv[i].className = `delLsDivBtn${sortingArr[i]}`;
+            sortingDelButton[i].className = `deleteListElement${sortingArr[i]}`;
         }
 
         image.setAttribute('src', '.\\photos\\iconReverse.png');
     }
     else if(image.getAttribute('src') == '.\\photos\\iconReverse.png'){
-        for(let l = 0; l < arrSorted.length; l++) {
-            if(arrSorted.indexOf(undefined) >= 0) {
-                arrSorted.splice(arrSorted.indexOf(undefined), 1);
-            }
+        
+        let paragNodes = document.querySelectorAll('p');
+        let sortingArr = [];
+
+        for(let i = 0; i < paragNodes.length; i++){
+            sortingArr[i] = paragNodes[i].innerHTML;
         }
 
-        arrSorted.reverse();
+        sortingArr.sort().reverse();
 
-        const listElements = document.querySelectorAll('li');
-        for(let l = 0; l < arrSorted.length; l++) {
-            listElements[l].innerHTML = arrSorted[l];
+        for(let i = 0; i < paragNodes.length; i++){
+            paragNodes[i].innerHTML = sortingArr[i];
+        }
+
+        const sortingDiv = document.querySelectorAll('#sortingDiv');
+        const sortingDelButton = document.querySelectorAll('#sortingDelButton');
+
+        for(let i = 0; i < sortingArr.length; i++){
+            sortingDiv[i].className = `delLsDivBtn${sortingArr[i]}`;
+            sortingDelButton[i].className = `deleteListElement${sortingArr[i]}`;
         }
 
         image.setAttribute('src', '.\\photos\\icon.png');
-    }
+    };
 });
