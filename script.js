@@ -1,19 +1,10 @@
-// array
 let mainArr = [];
 
-// Input
 const inputText = document.querySelector('#taskEnter')
-
-// Main button
 const mainButton = document.querySelector('.mainButtonSt')
-
-// Delete button
 const delBtnFirst = document.querySelector('.cancelButton')
-
-// List
 const list = document.querySelector('.listOutput')
 
-// List elements 
 let listElements = document.createElement('div')
 listElements.style = "width: 80%;" + 
     "display: flex;" +
@@ -21,26 +12,25 @@ listElements.style = "width: 80%;" +
 list.append(listElements);
 
 let i = 0;
-
 mainButton.addEventListener('click', () => {
     mainArr[mainArr.length] = inputText.value;
 
     let sec = document.createElement('div')
-    sec.className = `delLsDivBtn${i}`;
+    sec.className = `delLsDivBtn${inputText.value}`;
+    sec.setAttribute('id', 'buttonForRearranging');
     sec.style = "style = 100%;" +
         "display: flex;" + 
         "flex-direction: row;" + 
         "margin-top: 20px";
 
     let listText = document.createElement('li');
-    // listText.style = "display: flex;" + "text-align: left;";
     listText.innerHTML = mainArr[mainArr.length - 1];
     listText.style.textAlign = "left";
     sec.append(listText);
     listElements.append(sec);
     
     let deleteButton = document.createElement('button');
-    deleteButton.className = `deleteListElement${i}`;
+    deleteButton.className = `deleteListElement${inputText.value}`;
     deleteButton.innerHTML = 'x';
     deleteButton.style = "border-radius: 50%;" +
         "height: 25px;" +
@@ -53,46 +43,19 @@ mainButton.addEventListener('click', () => {
         "left: 54%";
     sec.append(deleteButton);
 
-    // Deleting List element
-    const delLsElement = document.querySelector(`.deleteListElement${i}`);
-    const divDelete = document.querySelector(`.delLsDivBtn${i}`);
-
+    // Deleting element div and value in array
+    const delLsElement = document.querySelector(`.deleteListElement${inputText.value}`);
+    const divDelete = document.querySelector(`.delLsDivBtn${inputText.value}`);
     delLsElement.addEventListener('click', () => {
         divDelete.remove();
         
-
-
-
-        let numOfButton = delLsElement.className.match(/(\d+)/)[0];
-        console.log(numOfButton);
-        // console.log(i);
-
-        console.log(mainArr[numOfButton])
-        delete mainArr[numOfButton];
-        console.log(mainArr[numOfButton])
-        // console.log(mainArr[numOfButton]);
-        // console.log(undefined);
-
-        let mainArrLength = mainArr.length;
-
-        let index = mainArr.indexOf(mainArr[numOfButton]);
-        mainArr.splice(index, 1)
-        
-        if(mainArr[m] == undefined && m < mainArrLength) {
-            // console.log(mainArr[m])
-            mainArr.splice(m, 1);
-            mainArrLength --;
-            // console.log(mainArrLength)
-        }
-
-
-        
-        
-        // i--;
-
-        console.log(mainArr);
+        let deletingElement = divDelete.className.substring(11);
+        mainArr.forEach(function(element) {
+            if(element == deletingElement) {
+                delete mainArr[mainArr.indexOf(element)];
+            };
+        });
     });
-
     i++;
 });
 
@@ -101,37 +64,44 @@ delBtnFirst.addEventListener('click', () => {
     inputText.value = '';
 });
 
-// Sorting
 const sortBtn = document.querySelector('.buttonSort');
-
-// image for reverse
-const image = document.querySelector('.image1');
-
-
-
-
+const image = document.querySelector('.image1');   
 
 sortBtn.addEventListener('click', () => {
     let arrSorted = [...mainArr];
     
     if(image.getAttribute('src') == '.\\photos\\icon.png'){
-    for(let m = 0; m < arrSorted.length; m++) {
-        index = arrSorted.indexOf(undefined);
-        if(index > 0){
-        arrSorted.splice(index, 1);
-        }
-    }
+        arrSorted.sort();
 
-    arrSorted.sort();
+        console.log(arrSorted)
     
-    const listElements = document.querySelectorAll('li');
-    for(let l = 0; l < arrSorted.length; l++) {
-        listElements[l].innerHTML = arrSorted[l];
-    }
+        const listElements = document.querySelectorAll('li');
+        for(let l = 0; l < arrSorted.length; l++) {
+            if(arrSorted.indexOf(undefined) >= 0) {
+                arrSorted.splice(arrSorted.indexOf(undefined), 1);
+            }
+        }
 
-    image.setAttribute('src', '.\\photos\\iconReverse.png');
+        console.log(arrSorted)
+
+        const divReArrange = document.querySelectorAll('#buttonForRearranging');
+        for(let l = 0; l < divReArrange.length; l++){
+            divReArrange[l].className = arrSorted[l];
+        }
+
+        for(let l = 0; l < arrSorted.length; l++) {
+            listElements[l].innerHTML = arrSorted[l];
+        }
+
+        image.setAttribute('src', '.\\photos\\iconReverse.png');
     }
     else if(image.getAttribute('src') == '.\\photos\\iconReverse.png'){
+        for(let l = 0; l < arrSorted.length; l++) {
+            if(arrSorted.indexOf(undefined) >= 0) {
+                arrSorted.splice(arrSorted.indexOf(undefined), 1);
+            }
+        }
+
         arrSorted.reverse();
 
         const listElements = document.querySelectorAll('li');
@@ -141,7 +111,4 @@ sortBtn.addEventListener('click', () => {
 
         image.setAttribute('src', '.\\photos\\icon.png');
     }
-
 });
-
-
